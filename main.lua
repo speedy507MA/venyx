@@ -120,11 +120,9 @@ do
 		input.InputEnded:Connect(function(key)
 			if key.UserInputType == Enum.UserInputType.MouseButton1 then
 				for i, callback in pairs(self.ended) do
-					coroutine.wrap(function()
-                        pcall(function()
-                            callback()
-                        end)
-                    end)
+					pcall(function()
+						callback()
+					end)
 				end
 			end
 		end)
@@ -643,11 +641,9 @@ do
 			end
 			
 			if callback then
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(true)
-                    end)
-                end)()
+				pcall(function()
+					callback(true)
+				end)
 			end
 			
 			close()
@@ -660,11 +656,9 @@ do
 			end
 			
 			if callback then
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(false)
-                    end)
-                end)()
+		                pcall(function()
+		                	callback(false)
+		                end)
 			end
 			
 			close()
@@ -711,23 +705,18 @@ do
 			
 			-- animation
 			utility:Pop(button, 10)
-			coroutine.wrap(function()
-                debounce = true
-                text.TextSize = 0
-                utility:Tween(button.Title, {TextSize = 14}, 0.2)
-                wait(0.2)
-                utility:Tween(button.Title, {TextSize = 12}, 0.2)
-                
-                if callback then
-                    coroutine.wrap(function()
-                        pcall(function()
-                            callback(function(...)
-                                self:updateButton(button, ...)
-                            end)
-                        end)
-                    end)()
-                end                
-            end)()
+			debounce = true
+			text.TextSize = 0
+			utility:Tween(button.Title, {TextSize = 14}, 0.2)
+			wait(0.2)
+			utility:Tween(button.Title, {TextSize = 12}, 0.2)
+			if callback then
+				pcall(function()
+				    callback(function(...)
+					self:updateButton(button, ...)
+				    end)
+				end)
+			end
 
 			
 			debounce = false
@@ -800,13 +789,11 @@ do
 			self:updateToggle(toggle, nil, active)
 			
 			if callback then
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(active, function(...)
-					        self:updateToggle(toggle, ...)
-				        end)
-                    end)
-                end)()
+	                    	pcall(function()
+		                        callback(active, function(...)
+						self:updateToggle(toggle, ...)
+					end)
+	                    	end)
 			end
 		end)
 		
@@ -896,13 +883,11 @@ do
 			end
 			
 			if callback then
-                coroutine.wrap(function()
-                    pcall(function()
-                        callback(input.Text, nil, function(...)
-                            self:updateTextbox(textbox, ...)
-                        end)
-                    end)
-                end)()
+		        	pcall(function()
+		                	callback(input.Text, nil, function(...)
+		                        	self:updateTextbox(textbox, ...)
+		                        end)
+		                end)
 			end
 		end)
 		
@@ -916,13 +901,11 @@ do
 			}, 0.2)
 			
 			if callback then
-                coroutine.wrap(function()
-                    pcall(function()
-                        callback(input.Text, true, function(...)
-                            self:updateTextbox(textbox, ...)
-                        end)
-                    end)
-                end)()
+	                    pcall(function()
+	                        callback(input.Text, true, function(...)
+	                            self:updateTextbox(textbox, ...)
+	                        end)
+	                    end)
 			end
 		end)
 		
@@ -997,13 +980,11 @@ do
 			animate()
 			
 			if callback then
-                coroutine.wrap(function()
-                    pcall(function()
-                        callback(function(...)
-                            self:updateKeybind(keybind, ...)
-                        end)
-                    end)
-                end)()
+	                    pcall(function()
+	                        callback(function(...)
+	                            self:updateKeybind(keybind, ...)
+	                        end)
+	                    end)
 			end
 		end}
 		
@@ -1028,13 +1009,11 @@ do
 				animate()
 				
 				if changedCallback then
-                    coroutine.wrap(function()
-                        pcall(function()
-                            changedCallback(key, function(...)
-                                self:updateKeybind(keybind, ...)
-                            end)
-                        end)
-                    end)()
+		                        pcall(function()
+		                            changedCallback(key, function(...)
+		                                self:updateKeybind(keybind, ...)
+		                            end)
+		                        end)
 				end
 			end
 		end)
@@ -1379,14 +1358,11 @@ do
 		
 		local callback = function(value)
 			if callback then
-                coroutine.wrap(function()
-                    pcall(function()
-                        callback(value, function(...)
-                            self:updateColorPicker(colorpicker, ...)
-                        end)
-                        
-                    end)
-                end)()
+	                    pcall(function()
+	                        callback(value, function(...)
+	                            self:updateColorPicker(colorpicker, ...)
+	                        end)
+	                    end)
 			end
 		end
 		
@@ -1434,12 +1410,9 @@ do
 						hue, sat, brightness = Color3.toHSV(color3)
 						
 						self:updateColorPicker(colorpicker, nil, color3)
-						coroutine.wrap(function()
-                            pcall(function()
-                                callback(color3)
-                                
-                            end)
-                        end)()
+			                            pcall(function()
+			                                callback(color3)
+			                            end)
 					end
 				end)
 			end
@@ -1464,11 +1437,9 @@ do
 				self:updateColorPicker(colorpicker, nil, {hue, sat, brightness}) -- roblox is literally
 				utility:Tween(canvas.Cursor, {Position = UDim2.new(sat, 0, 1 - brightness, 0)}, 0.1) -- overwrite
 				
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(color3)
-                    end)
-                end)()
+		                pcall(function()
+		                	callback(color3)
+		                end)
 				utility:Wait()
 			end
 		end)
@@ -1489,14 +1460,12 @@ do
 				self:updateColorPicker(colorpicker, nil, {hue, sat, brightness}) -- roblox is literally retarded
 				utility:Tween(tab.Container.Color.Select, {Position = UDim2.new(x, 0, 0, 0)}, 0.1) -- overwrite
 				
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(color3)
+                    		pcall(function()
+                        		callback(color3)
 				        utility:Wait()
-                    end)
-		        end)()
-            end
-        end)
+                    		end)
+           		end
+        	end)
 		-- click events
 		local button = colorpicker.Button
 		local toggle, debounce, animate
@@ -1685,13 +1654,11 @@ do
 		
 		local callback = function(value)
 			if callback then
-                coroutine.wrap(function()
-                    pcall(function()
-                        callback(value, function(...)
-                            self:updateSlider(slider, ...)
-                        end)
-                    end)
-                end)()
+	                    pcall(function()
+	                        callback(value, function(...)
+	                            self:updateSlider(slider, ...)
+	                        end)
+	                    end)
 			end
 		end
 		
@@ -1708,11 +1675,9 @@ do
 				utility:Tween(circle, {ImageTransparency = 0}, 0.1)
 				
 				value = self:updateSlider(slider, nil, nil, min, max, value)
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(value)
-                    end)
-                end)()
+		                pcall(function()
+		                	callback(value)
+		                end)
 				
 				utility:Wait()
 			end
@@ -1724,12 +1689,10 @@ do
 		textbox.FocusLost:Connect(function()
 			if not tonumber(textbox.Text) then
 				value = self:updateSlider(slider, nil, default or min, min, max)
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(value)
-                    end)
-                end)()
-            end
+		                pcall(function()
+		                	callback(value)
+		                end)
+            		end
 		end)
 		
 		textbox:GetPropertyChangedSignal("Text"):Connect(function()
@@ -1739,11 +1702,9 @@ do
 				textbox.Text = text:sub(1, #text - 1)
 			elseif not allowed[text] then	
 				value = self:updateSlider(slider, nil, tonumber(text) or value, min, max)
-				coroutine.wrap(function()
-                    pcall(function()
-                        callback(value)
-                    end)
-                end)()
+			        pcall(function()
+			                callback(value)
+			        end)
 			end
 		end)
 		
@@ -2204,13 +2165,11 @@ do
 			
 			button.MouseButton1Click:Connect(function()
 				if callback then
-                    coroutine.wrap(function()
-                        pcall(function()
-                            callback(value, function(...)
-                                self:updateDropdown(dropdown, ...)
-                            end)
-                        end)
-                    end)()
+					pcall(function()
+					    callback(value, function(...)
+						self:updateDropdown(dropdown, ...)
+					    end)
+					end)
 				end
 
 				self:updateDropdown(dropdown, value, nil, callback)
