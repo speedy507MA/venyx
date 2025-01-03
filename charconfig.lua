@@ -1,4 +1,4 @@
-{
+return {
     ["Caroline Forbes"] = {
        ["Outfits"] = {
           ["Classic Caroline"],
